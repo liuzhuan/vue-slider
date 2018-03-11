@@ -2,6 +2,8 @@
 
 > Vue 仿 QQ 左滑删除组件
 
+这个仓库在*Chris威*基础上，去掉了 DOM 操作，换为更符合 Vue 的数据绑定。
+
 ## 具体项目如下图
 
 ![slider.gif](https://upload-images.jianshu.io/upload_images/6633377-23f94155957cfd91.gif?imageMogr2/auto-orient/strip)

@@ -106,7 +106,7 @@ export default {
   },
   created() {
     /**
-     * 新增增加 type 属性
+     * 为每个 list 元素新增 type 属性
      * https://cn.vuejs.org/v2/guide/reactivity.html
      */
     this.list = this.list.map(item => {

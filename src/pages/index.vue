@@ -2,12 +2,12 @@
   <div class="container">
     <div class="page-title">滑动组件</div>
     <ul>
-      <li class="list-item" v-for="(item, index) in list" data-type="0">
-        <div class="list-box" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
+      <li class="list-item" v-for="(item, index) in list" :data-type="item.type">
+        <div class="list-box" :data-index="index" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip">
           <img class="list-img" :src="item.imgUrl" alt="">
           <div class="list-content">
             <p class="title">{{item.title}}</p>
-            <p class="tips">{{item.tips}}</p>
+            <p class="tips"> {{ item.type }} {{item.tips}}</p>
             <p class="time">{{item.time}}</p>
           </div>
         </div>
@@ -57,63 +57,61 @@ export default {
     // 跳转
     skip() {
       if (this.checkSlide()) {
-        this.resetSlide();
+        this.resetSlide()
       } else {
-        alert("You click the slide!");
+        alert("You click the slide!")
       }
     },
 
     // 滑动开始
     touchStart(e) {
-      this.startX = e.touches[0].clientX;
+      this.startX = e.touches[0].clientX
     },
 
     // 滑动结束
     touchEnd(e) {
-      let parentElement = e.currentTarget.parentElement;
-      this.endX = e.changedTouches[0].clientX;
+      this.endX = e.changedTouches[0].clientX
+      const index = e.currentTarget.dataset.index
+      const type = this.list[index].type
+      const diffX = this.startX - this.endX
 
-      if (parentElement.dataset.type == 0 && this.startX - this.endX > 30) {
-        this.resetSlide();
-        parentElement.dataset.type = 1;
+      if (type == 0 && diffX > 30) {
+        this.resetSlide()
+        this.list[index].type = 1
+      } else if (type == 1 && diffX < -30) {
+        this.resetSlide()
+        this.list[index].type = 0
       }
 
-      if (parentElement.dataset.type == 1 && this.startX - this.endX < -30) {
-        this.resetSlide();
-        parentElement.dataset.type = 0;
-      }
-
-      this.startX = 0;
-      this.endX = 0;
+      this.startX = 0
+      this.endX = 0
     },
 
     // 判断当前是否有滑块处于滑动状态
     checkSlide() {
-      let listItems = document.querySelectorAll(".list-item");
-
-      for (let i = 0; i < listItems.length; i++) {
-        if (listItems[i].dataset.type == 1) {
-          return true;
-        }
-      }
-      return false;
+      return this.list.some(item => item.type == 1)
     },
 
     // 重置所有滑块
     resetSlide() {
-      let listItems = document.querySelectorAll(".list-item");
-
-      for (let i = 0; i < listItems.length; i++) {
-        listItems[i].dataset.type = 0;
-      }
+      this.list.forEach(item => item.type = 0)
     },
 
     // 删除
     deleteItem(e) {
-      let index = e.currentTarget.dataset.index;
-      this.resetSlide();
-      this.list.splice(index, 1);
+      const index = e.currentTarget.dataset.index
+      this.resetSlide()
+      this.list.splice(index, 1)
     }
+  },
+  created() {
+    /**
+     * 新增增加 type 属性
+     * https://cn.vuejs.org/v2/guide/reactivity.html
+     */
+    this.list = this.list.map(item => {
+      return Object.assign({}, item, { type: 0 })
+    })
   }
 };
 </script>

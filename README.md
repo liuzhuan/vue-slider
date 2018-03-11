@@ -1,16 +1,16 @@
 # vue-slider
 
-> Vue·ÂQQ×ó»¬É¾³ı×é¼ş
+> Vue ä»¿ QQ å·¦æ»‘åˆ é™¤ç»„ä»¶
 
-## ¾ßÌåÏîÄ¿ÈçÏÂÍ¼
+## å…·ä½“é¡¹ç›®å¦‚ä¸‹å›¾
 
 ![slider.gif](https://upload-images.jianshu.io/upload_images/6633377-23f94155957cfd91.gif?imageMogr2/auto-orient/strip)
 
-Èç¹ûÓĞÒÉÎÊ£¬¿ÉÒÔ²Î¿¼ÎÒµÄÕâÆª[ÎÄÕÂ](https://juejin.im/post/5aa3771af265da23771904d4)
+å¦‚æœæœ‰ç–‘é—®ï¼Œå¯ä»¥å‚è€ƒ*Chriså¨*çš„è¿™ç¯‡[æ–‡ç« ](https://github.com/liuzhuan/vue-slider.git)ã€‚
 
 ## Build Setup
 
-``` bash
+```sh
 # install dependencies
 npm install
 
